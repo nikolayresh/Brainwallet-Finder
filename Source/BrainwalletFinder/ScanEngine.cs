@@ -99,6 +99,8 @@ namespace BrainwalletFinder
 		{
 			ReadWordTokens(file);
 
+			Console.WriteLine($">>> Starting {_tasks.Length:N0} engine threads...");
+
 			for (int iTask = 0; iTask < _tasks.Length; iTask++)
 			{
 				Task task = new Task(ScanRunner, TaskCreationOptions.LongRunning);
@@ -138,7 +140,7 @@ namespace BrainwalletFinder
 
 				string TEXT = string.Join("\x20", tokens);
 
-				HashResult hashResult = Hasher.GetHashResult(TEXT);
+				HashResult hashResult = Hasher.GetHash(TEXT);
 				
 				CheckHash(hashResult.Hash);
 				CheckHash(hashResult.RevHash);
@@ -231,6 +233,7 @@ namespace BrainwalletFinder
 			for (int index = 0; index < tokens.Count; index++)
 			{
 				string[] next = tokens.Skip(index).Take(length).ToArray();
+
 				if (next.Length == length)
 				{
 					queue.Enqueue(next);

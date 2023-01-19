@@ -5,7 +5,7 @@ namespace BrainwalletFinder
 {
 	internal static class Hasher
 	{
-		public static HashResult GetHashResult(string plainText)
+		public static HashResult GetHash(string plainText)
 		{
 			var hr = new HashResult();
 
